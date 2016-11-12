@@ -1,3 +1,9 @@
+Capl.tokens
+CaplLexer.py
+CaplLexer.tokens
+CaplListener.py
+CaplParser.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
