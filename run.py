@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
 from antlr4 import FileStream, CommonTokenStream, ParseTreeWalker
-#from antlr4 import *
 from CaplLexer import CaplLexer
 from CaplParser import CaplParser
-# from MyCaplListener import MyCaplListener
 from CaplToCListener import CaplToCListener
 import tqdm
 #from filecache import filecache
@@ -12,7 +10,7 @@ import tqdm
 import sys
 
 
-# TODO how to cache the tree
+# TODO how to cache the tree?
 def getTree(file):
     input = FileStream(file, encoding="iso-8859-15")
     lexer = CaplLexer(input)
@@ -88,8 +86,6 @@ def main(argv):
         f.print_raw()
         print("")
 
-
-
     # print("Global vars:")
     # for v in cl.global_vars:
     #     if not v.used:
@@ -101,32 +97,8 @@ def main(argv):
     #             v.print()
 
 def print_global_functions():
-    print("void write(std::string a){}")
-    print("void write(std::string a, std::string a1){}")
-    print("void write(std::string a, std::string a1, float a2){}")
-    print("void write(std::string a, float a0, std::string a1, float a2){}")
-    print("void write(std::string a, void * a1){}")
-    print("void write(std::string a, void * a1, void * a2){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4, void * a5){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4, void * a5, void * a6){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4, void * a5, void * a6, void * a7){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4, void * a5, void * a6, void * a7, void * a8){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4, void * a5, void * a6, void * a7, void * a8, void * a9){}")
-    print("void write(std::string a, void * a1, void * a2, void * a3, void * a4, void * a5, void * a6, void * a7, void * a8, void * a9, void * a10){}")
-    print("void write(std::string a, float a1){}")
-    print("void write(std::string a, float a1, float a2){}")
-    print("void write(std::string a, float a1, float a2, float a3){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4, float a5){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4, float a5, float a6){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4, float a5, float a6, float a7){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4, float a5, float a6, float a7, float a8){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4, float a5, float a6, float a7, float a8, float a9){}")
-    print("void write(std::string a, float a1, float a2, float a3, float a4, float a5, float a6, float a7, float a8, float a9, float a10){}")
-    print("void write(std::string a, std::string a1, std::string a2, std::string a3, std::string a4, std::string a5, std::string a6, std::string a7, std::string a8, std::string a9, std::string a10){}")
-    print("void write(std::string a, std::string a1, float a11, std::string a2, float a21, std::string a3, float a31, std::string a4, float a41, std::string a5, float a51, std::string a6, float a61, std::string a7, float a71, std::string a8, float a81, std::string a9, float a91){}")
+    #print("void write(std::string a){}")
+    print("void write(std::string a, ...){}")
     print("int sysGetVariableInt(std::string a, std::string a1){ return 0; }")
     print("long sysGetVariableLong(std::string a, std::string a1){ return 0; }")
     print("long sysGetVariableLongLong(std::string a, std::string a1){ return 0; }")
@@ -136,8 +108,7 @@ def print_global_functions():
     print("void sysSetVariableString(std::string a, std::string a1, char a2[]){ }")
     print("int random(long a) {return 0;}")
     #print("void snprintf(std::string a, int a2, std::string b) {}")
-    print("int elcount(int a) { return 0;}")
-    print("int elcount(void * a) { return 0;}")
+    print("int elcount(...) { return 0;}")
     print("int _max(int a, int a1) { return 0;}")
     print("int _min(int a, int a1) { return 0;}")
     print("float cos(float a) { return 0;}")
@@ -154,11 +125,12 @@ def print_global_functions():
     print("void filePutString (char buf[], int a, dword fh){}")
     print("void output(message * a) { }")
     print("float pi = 3.14;")
+    print("void memcpy(...) {}")
 
 def print_global_functions_specifc():
-    print("void memcpy(struct position a, struct position b) {}")
-    print("void memcpy(struct P36MoveType a, struct P36MoveType b) {}")
-
+    pass
+    # methods for typedefs - but with the "..." as parameter it is not needed
+    # print("void memcpy(struct P36MoveType a, struct P36MoveType b) {}")
     #     for i in ['sysGetVariableInt', 'sysGetVariableLong', 'sysSetVariableInt', 'sysSetVariableLong', 'random'
     #               ,'memcpy', 'snprintf', 'write', 'elcount', '_max', 'cos', 'abs', 'sin', '_round', '_floor', '_min'
     #               , 'cancelTimer', 'fileClose']:
