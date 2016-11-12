@@ -52,14 +52,14 @@ g++ -Wall -Wextra -ferror-limit=99999 -O3 -fstack-protector-all -fmudflap -lmudf
 As initially said this conversion is not complete. If a CAPL-constant or CAPL-method is missing, you can add this in `run.py` in the
 `print_global_functions` method.
 
-Also if you have typedefs (for example a named struct) you might need to add the correct memcpy() to `run.py` and
-`print_global_functions_specifc`. See the already existing examples.
-
 #### Not working / Bugs
 
 The conversion CAN-specific things likel `msg.` and `this.` is implemented by string replacement and not very robust. 
 
 The special arrays which can contain strings as keys are not implemented
+
+Unspecified multidemensional arrays. E.g. as parameter to a function following is valid: `void func(int arr[][])`. My solution is to do
+string replacement on it `replace("[][], "[][10]")` - which might yield falsse-positives for array out of bound.
 
 Basically it is the best to stick closest to CPP like code and it works fine.
 
