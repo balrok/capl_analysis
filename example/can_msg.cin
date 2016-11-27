@@ -1,0 +1,26 @@
+/*@!Encoding:1252*/
+
+includes
+{
+}
+
+
+
+variables {
+}
+
+void test_capl_msg0() {
+  message * msg;
+  test_capl_msg(msg);
+}
+
+void test_capl_msg(message * msg) {
+  msg.id = 0x0200;  // broadcast id
+  msg.dlc = 6;
+  msg.byte(0) = 1;
+  msg.byte(1) = 2;
+  msg.byte(2) = 3;
+  msg.byte(3) = 4;
+  msg.word(4) = 5;
+  output(msg);
+}

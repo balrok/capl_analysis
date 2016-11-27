@@ -1,5 +1,14 @@
 # capl_analysis
-Static analysis for capl code by translation to C.
+Static analysis for capl code by translation to CPP.
+
+## Similar Projects
+
+As always, you will often just find existing projects after you are done:
+
+* [busmaster][https://github.com/rbei-etas/busmaster] seems to have a can-cpp converter see their issues: [#420][https://github.com/rbei-etas/busmaster/issues/420] and [#585][https://github.com/rbei-etas/busmaster/issues/585]
+	* In comparison this project is much smaller:
+		* easier to extend and enhance
+		* more bugs ;)
 
 ## How it works
 Capl looks very similar to C/CPP code. When not so many capl-specific constructs are in your code base it is quite simple to convert a

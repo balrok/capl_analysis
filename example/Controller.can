@@ -1,0 +1,36 @@
+/*@!Encoding:1252*/
+
+includes
+{
+  #include "can_msg.cin"
+}
+
+
+
+variables {
+	int test;
+	int test_notused; // this variable is intentionally not used
+	int test_array[10];
+}
+
+on start {
+	test = 13;
+
+	test_array[3] = 1;
+	test_array[13] = 1; // testing out of bounds with a constant
+	test_array[test] = 1; // testing out of bounds with a variable
+	test_method(test); // converting int to char - gives an error?
+	test_capl_msg0();
+}
+
+on message * {
+  if (this.id >= 0x100 && this.id <= 0x100+(10*0x10)+10) { // cmd to server
+      write("STATUS - %d", this.id);
+  }
+}
+
+
+void test_notused_method() { } // intentionally not used
+
+void test_method(char a) {
+}
