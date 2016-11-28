@@ -23,12 +23,6 @@ on start {
 	test_capl_msg0();
 }
 
-on message * {
-  if (this.id >= 0x100 && this.id <= 0x100+(10*0x10)+10) { // cmd to server
-      write("STATUS - %d", this.id);
-  }
-}
-
 
 void test_notused_method() { } // intentionally not used
 

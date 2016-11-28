@@ -9,9 +9,11 @@ includes
 variables {
 }
 
-void test_capl_msg0() {
-  message * msg;
-  test_capl_msg(msg);
+on message * {
+  if (this.id >= 0x100 && this.id <= 0x100+(10*0x10)+10) { // cmd to server
+      write("STATUS - %d", this.id);
+  }
+  test_capl_msg(this);
 }
 
 void test_capl_msg(message * msg) {

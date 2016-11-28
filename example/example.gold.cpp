@@ -10,23 +10,19 @@ struct message {int id; int msgChannel;int byte_0;int byte_1;int byte_2;int byte
 
 // capl functions
 
-void write(std::string a, ...){}
-int sysGetVariableInt(std::string a, std::string a1){ return 0; }
-long sysGetVariableLong(std::string a, std::string a1){ return 0; }
-long sysGetVariableLongLong(std::string a, std::string a1){ return 0; }
-void sysSetVariableInt(std::string a, std::string a1, int a2){ }
-void sysSetVariableLong(std::string a, std::string a1, long a2){ }
-void sysSetVariableLongLong(std::string a, std::string a1, long a2){ }
-void sysSetVariableString(std::string a, std::string a1, char a2[]){ }
+void write(std::string &a, ...){assert(a!=null);}
+int sysGetVariableInt(std::string &a, std::string &a1){ assert(a!=null&&a1!=null); return 0; }
+long sysGetVariableLong(std::string &a, std::string &a1){ assert(a!=null&&a1!=null);return 0; }
+long sysGetVariableLongLong(std::string &a, std::string &a1){ assert(a!=null&&a1!=null); return 0; }
+void sysSetVariableInt(std::string &a, std::string &a1, int a2){assert(a!=null&&a1!=null&&a2!=-1);}
+void sysSetVariableLong(std::string &a, std::string &a1, long a2){assert(a!=null&&a1!=null&&a2!=-1); }
+void sysSetVariableLongLong(std::string &a, std::string &a1, long a2){assert(a!=null&&a1!=null&&a2!=-1); }
+void sysSetVariableString(std::string &a, std::string &a1, char a2[]){assert(a!=null&&a1!=null&&a2!=-1); }
 int random(long a) {return 0;}
 int elcount(...) { return 0;}
 int _max(int a, int a1) { return 0;}
 int _min(int a, int a1) { return 0;}
-float cos(float a) { return 0;}
-float sin(float a) { return 0;}
 float arctan(float a) { return 0;}
-float sqrt(float a) { return 0;}
-int abs(int a) { return 0;}
 float _round(float a) { return 0;}
 float _floor(float a) { return 0;}
 void cancelTimer(msTimer a) { }
@@ -37,6 +33,31 @@ void filePutString (char buf[], int a, dword fh){}
 void output(message * a) { }
 float pi = 3.14;
 void memcpy(...) {}
+int intentionally_not_used(){
+int i=0;
+write('');
+i+=sysGetVariableInt('', '');
+i+=sysGetVariableLong('', '');
+i+=sysGetVariableLongLong('', '');
+sysSetVariableInt('','',0);
+sysSetVariableLong('','',0);
+sysSetVariableLongLong('','',0);
+sysSetVariableString('','','');
+i+=random(0);
+i+=elcount();
+i+=_max(0,0);
+i+=_min(0,0);
+i+=arctan(0);
+i+=_round(0);
+i+=_floor(0);
+cancelTimer(0);
+setTimer(0);
+fileClose(0);
+i+=openFileWrite('',0);
+filePutString ('',0,0);
+output(null);
+memcpy();
+return i;}
 
 
 // global variables
@@ -53,10 +74,9 @@ static int test_array[10];
 // function definitions
 
 int main();
-void handle_message();
 void test_notused_method();
 void test_method(char a);
-void test_capl_msg0();
+void handle_message();
 void test_capl_msg(message * msg);
 
 
@@ -72,20 +92,16 @@ int main(){
 	test_capl_msg0();
 return 0;}
 
-void handle_message(){ message * msgthis;
-  if (msgthis->id >= 0x100 && msgthis->id <= 0x100+(10*0x10)+10) { // cmd to server
-      write("STATUS - %d", msgthis->id);
-  }
-}
-
 void test_notused_method(){ } // intentionally not used
 
 void test_method(char a){
 }
 
-void test_capl_msg0(){
-  message * msg;
-  test_capl_msg(msg);
+void handle_message(){ message * msgthis = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,}; 
+  if (msgthis->id >= 0x100 && msgthis->id <= 0x100+(10*0x10)+10) { // cmd to server
+      write("STATUS - %d", msgthis->id);
+  }
+  test_capl_msg(this);
 }
 
 void test_capl_msg(message * msg){
