@@ -69,7 +69,7 @@ class CaplToCListener(CaplListener):
                 raw_head = raw_head.replace("on start", "int main")
             if raw_head.startswith("on message *"):	
                 raw_head = raw_head.replace("on message *", "void handle_message")
-                raw = "{ message * msgthis;" + raw[1:]
+                raw = "{ message * msgthis = {%s}; %s" % ("0,"*20, raw[1:])
             raw_head += "()"
         raw_head = raw_head.replace("matrix[][]", "matrix[][40]")
         raw_head = raw_head.replace("[][]", "[][10]")
